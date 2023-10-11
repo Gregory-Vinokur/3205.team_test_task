@@ -1,0 +1,59 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  border: 2px solid orange;
+  max-width: 50rem;
+  padding: 2rem;
+  gap: 3px;
+  font-size: 1.8rem;
+}
+
+input {
+  font-size: 1.8rem;
+  position: relative;
+}
+
+input[aria-invalid='true'] {
+  border: 2px solid rgb(223, 53, 53);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-decoration: underline 2px solid orange;
+}
+
+button {
+  font-size: 1.8rem;
+}
+
+label {
+  display: flex;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+label > span {
+  flex: 1;
+  margin-right: 10px;
+  padding-top: 3px;
+}
+
+.required {
+  color: rgb(223, 53, 53);
+  margin-left: 2px;
+}
+
+.error-message {
+  color: rgb(223, 53, 53);
+  font-size: 1.5rem;
+}
