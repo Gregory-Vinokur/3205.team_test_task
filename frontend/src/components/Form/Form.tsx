@@ -1,14 +1,19 @@
 import MaskedInput from 'react-text-mask';
 import { useForm } from 'react-hook-form';
 import './Form.css';
-import { useRef } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
+import { IUser } from '../../interfaces/IUser';
 
 type FormData = {
   email: string;
   number: string;
 };
 
-function Form() {
+type FormProps = {
+  setUsers: Dispatch<SetStateAction<IUser[] | null | undefined>>;
+};
+
+function Form({ setUsers }: FormProps) {
   const {
     register,
     setValue,
@@ -26,6 +31,7 @@ function Form() {
   const previousController = useRef<AbortController | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
+    setUsers(null);
     try {
       if (previousController.current) {
         previousController.current.abort();
@@ -48,7 +54,7 @@ function Form() {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log('Response data:', responseData);
+        setUsers(responseData);
         reset();
       } else {
         console.error('Request failed');

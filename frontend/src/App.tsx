@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import './App.css';
-import Form from './Form';
+import Form from './components/Form/Form';
+import UsersList from './components/UsersList/UsersList';
+import { IUser } from './interfaces/IUser';
 
 function App() {
+  const [users, setUsers] = useState<IUser[] | null | undefined>(undefined);
   return (
     <main>
-      <Form />
+      <Form setUsers={setUsers} />
+      <UsersList users={users} />
     </main>
   );
 }
