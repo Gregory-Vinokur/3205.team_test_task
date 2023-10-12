@@ -11,9 +11,10 @@ type FormData = {
 
 type FormProps = {
   setUsers: Dispatch<SetStateAction<IUser[] | null | undefined>>;
+  setCount: Dispatch<SetStateAction<number | null>>;
 };
 
-function Form({ setUsers }: FormProps) {
+function Form({ setUsers, setCount }: FormProps) {
   const {
     register,
     setValue,
@@ -32,6 +33,7 @@ function Form({ setUsers }: FormProps) {
 
   const onSubmit = handleSubmit(async (data) => {
     setUsers(null);
+    setCount(5);
     try {
       if (previousController.current) {
         previousController.current.abort();

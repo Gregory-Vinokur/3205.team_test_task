@@ -6,10 +6,11 @@ import { IUser } from './interfaces/IUser';
 
 function App() {
   const [users, setUsers] = useState<IUser[] | null | undefined>(undefined);
+  const [count, setCount] = useState<number | null>(null);
   return (
     <main>
-      <Form setUsers={setUsers} />
-      <UsersList users={users} />
+      <Form setUsers={setUsers} setCount={setCount} />
+      <UsersList users={users} count={count} setCount={setCount} />
     </main>
   );
 }
