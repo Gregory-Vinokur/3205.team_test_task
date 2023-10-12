@@ -1,6 +1,7 @@
 import MaskedInput from 'react-text-mask';
 import { useForm } from 'react-hook-form';
 import './Form.css';
+import { useRef } from 'react';
 
 type FormData = {
   email: string;
@@ -22,10 +23,15 @@ function Form() {
     mode: 'onChange',
   });
 
+  const previousController = useRef<AbortController | null>(null);
+
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     try {
+      if (previousController.current) {
+        previousController.current.abort();
+      }
       const controller = new AbortController();
+      previousController.current = controller;
       const { signal } = controller;
       const searchParams = new URLSearchParams();
       searchParams.append('email', data.email);
