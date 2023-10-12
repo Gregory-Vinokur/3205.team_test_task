@@ -1,23 +1,16 @@
-import { Dispatch, SetStateAction } from 'react';
-import { IUser } from '../../interfaces/IUser';
-import Spinner from '../Spinner/Spinner';
-import UserItem from '../UserItem/UserItem';
-import './UsersList.css';
-
-type UsersListProps = {
-  users: IUser[] | null | undefined;
-  count: number | null;
-  setCount: Dispatch<SetStateAction<number | null>>;
-};
+import { Spinner } from '../Spinner';
+import { UserItem } from '../UserItem';
+import { UsersListProps } from './UserList.types';
+import './UsersList.styles.scss';
 
 const UsersList = ({ users, count, setCount }: UsersListProps) => {
   return (
     <div className="users-list">
-      <h2 className="user-list__title">Search results:</h2>
+      <h2 className="users-list__title">Search results:</h2>
       <div className="users-list__container">
         {users && users.length === 0 && (
           <p className="users-list__text">
-            There are no users with this email.
+            There are no users matching the request.
           </p>
         )}
         {users === null && <Spinner count={count} setCount={setCount} />}
@@ -29,4 +22,4 @@ const UsersList = ({ users, count, setCount }: UsersListProps) => {
   );
 };
 
-export default UsersList;
+export { UsersList };

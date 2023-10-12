@@ -1,18 +1,8 @@
 import MaskedInput from 'react-text-mask';
 import { useForm } from 'react-hook-form';
-import './Form.css';
-import { Dispatch, SetStateAction, useRef } from 'react';
-import { IUser } from '../../interfaces/IUser';
-
-type FormData = {
-  email: string;
-  number: string;
-};
-
-type FormProps = {
-  setUsers: Dispatch<SetStateAction<IUser[] | null | undefined>>;
-  setCount: Dispatch<SetStateAction<number | null>>;
-};
+import './Form.styles.scss';
+import { useRef } from 'react';
+import { FormData, FormProps } from './Form.types';
 
 function Form({ setUsers, setCount }: FormProps) {
   const {
@@ -71,14 +61,15 @@ function Form({ setUsers, setCount }: FormProps) {
   });
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className="form" onSubmit={onSubmit}>
       <p className="form__title">Search Form</p>
-      <label htmlFor="email">
-        <span>
+      <label className="form__label" htmlFor="email">
+        <span className="form__label-text">
           E-mail<span className="required">*</span>:
         </span>
-        <div className="input-container">
+        <div className="form__input-container">
           <input
+            className="form__input"
             {...register('email', {
               required: 'Enter the e-mail',
               pattern: {
@@ -100,10 +91,11 @@ function Form({ setUsers, setCount }: FormProps) {
           )}
         </div>
       </label>
-      <label htmlFor="number">
-        <span>Number:</span>
-        <div className="input-container">
+      <label className="form__label" htmlFor="number">
+        <span className="form__label-text">Number:</span>
+        <div className="form__input-container">
           <MaskedInput
+            className="form__input"
             {...register('number', {
               pattern: {
                 value: /^\d{2}-\d{2}-\d{2}$/,
@@ -125,9 +117,11 @@ function Form({ setUsers, setCount }: FormProps) {
           )}
         </div>
       </label>
-      <button type="submit">Submit</button>
+      <button className="form__button" type="submit">
+        Submit
+      </button>
     </form>
   );
 }
 
-export default Form;
+export { Form };

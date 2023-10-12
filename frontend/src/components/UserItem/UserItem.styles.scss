@@ -1,0 +1,16 @@
+.user-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: $box-shadow;
+  border: 2px solid $orange-color;
+  padding: 3rem;
+  gap: 1rem;
+  font-size: 1.8rem;
+
+  &__title {
+    margin-bottom: 2rem;
+    text-decoration: underline 2px solid $orange-color;
+    margin-right: 5px;
+  }
+}
