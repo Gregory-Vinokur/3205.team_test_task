@@ -10,11 +10,13 @@ export type FormData = {
 export type FormProps = {
   setUsers: Dispatch<SetStateAction<IUser[] | null | undefined>>;
   setCount: Dispatch<SetStateAction<number | null>>;
+  setError: Dispatch<SetStateAction<string | null>>;
 };
 
 export type fetchUsersProps = {
   data: FormData;
   setUsers: Dispatch<SetStateAction<IUser[] | null | undefined>>;
   reset: UseFormReset<FormData>;
+  setError: Dispatch<SetStateAction<string | null>>;
   previousController: React.MutableRefObject<AbortController | null>;
 };

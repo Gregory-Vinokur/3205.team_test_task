@@ -1,6 +1,6 @@
 import { fetchUsersProps } from "./Form.types";
 
-export async function fetchUsers({ data, setUsers, reset, previousController }: fetchUsersProps) {
+export async function fetchUsers({ data, setUsers, setError, reset, previousController }: fetchUsersProps) {
   try {
     if (previousController.current) {
       previousController.current.abort();
@@ -23,12 +23,20 @@ export async function fetchUsers({ data, setUsers, reset, previousController }: 
       reset();
     } else {
       console.error('Request failed');
+      setError('Request failed');
+      setUsers(null);
     }
   } catch (error) {
     if (error instanceof Error) {
-      if (error.name !== 'AbortError') {
-        console.error('An error occurred', error);
+      if (error.name === 'AbortError') {
+        console.error('Request was aborted');
+      } else {
+        console.error('A network error occurred', error);
+        throw error;
       }
+    } else {
+      console.error('An error occurred', error);
     }
   }
 }
+

@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { FormData, FormProps } from './Form.types';
 import { fetchUsers } from './Form.service';
 
-function Form({ setUsers, setCount }: FormProps) {
+function Form({ setUsers, setCount, setError }: FormProps) {
   const {
     register,
     setValue,
@@ -25,7 +25,15 @@ function Form({ setUsers, setCount }: FormProps) {
   const onSubmit = handleSubmit(async (data) => {
     setUsers(null);
     setCount(5);
-    await fetchUsers({ data, setUsers, reset, previousController });
+    setError(null);
+
+    try {
+      await fetchUsers({ data, setUsers, reset, previousController, setError });
+    } catch (error) {
+      setError('A network error occurred. Please try again.');
+      setUsers(null);
+      reset();
+    }
   });
 
   return (
